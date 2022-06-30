@@ -1,22 +1,38 @@
-#include<sys/types.h>
-#include<sys/stat.h>
 #include<stdio.h>
-#include<fcntl.h>
-main( int argc,char *argv[3] )
+#include<time.h>
+void main()
 {
-int fd,i;
-char buf[2];
-fd=open(argv[1],O_RDONLY,0777);
-if(fd==-argc)
-{
-printf("file open error");
-}
-else
-{
-while((i=read(fd,buf,1))>0)
-{
-printf("%c",buf[0]);
-}
-close(fd);
-}
+    int i,j,n,swap=0,pos;
+    clock_t t;
+    printf("no of elements \n");
+    scanf("%d",&n);
+    int a[n];
+    printf("enter the elements :\n");
+    for(int i=0;i<n;i++)
+    scanf("%d",&a[i]);
+    t=clock();
+    for(int i=0;i<n;i++)
+    {
+        pos=i;
+        for(int j=0;j<n;j++)
+        {
+            if(a[pos]<a[j])
+            pos=j;
+        }
+        if(pos!=i)
+        {
+            swap=a[i];
+            a[i]=a[pos];
+            a[pos]=swap;
+        }
+    }
+    t=clock()-t;
+    printf("time: %lf\n",(double)t);
+    printf("sorted array\n");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d",a[i]);
+    }
+    
+    
 }
